@@ -2,7 +2,7 @@ exports.up = function (knex) {
   return knex.schema
     .createTable("department", (tbl) => {
       tbl.increments();
-      tbl.string("name", 129).notNullable().unique();
+      tbl.string("name", 128).notNullable().unique();
     })
     .createTable("users", (tbl) => {
       tbl.increments();
@@ -10,7 +10,7 @@ exports.up = function (knex) {
       tbl.string("password", 256).notNullable().unique().index();
 
       tbl
-        .integr("department")
+        .integer("department")
         .unsigned()
         .references("department.id")
         .onDelete("RESTRICT")
