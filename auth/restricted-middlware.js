@@ -3,7 +3,7 @@ const secret = require("../config/secret");
 
 module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization || "";
-  const token = authHeader.split(" ")[2];
+  const token = authHeader.split(" ")[1];
 
   if (token) {
     jwt.verify(token, secret.jwtSecret, (err, decodedToken) => {
