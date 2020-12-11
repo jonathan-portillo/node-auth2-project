@@ -12,10 +12,7 @@ function find() {
 }
 
 function findBy(filter) {
-  return db("users as u", "u.department", "d.id")
-    .select("u.id", "d.name as department name", "u.password")
-    .where(filter)
-    .orderBy("u.id");
+  return db("users").where(filter).orderBy("id");
 }
 
 async function add(user) {

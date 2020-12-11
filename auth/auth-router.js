@@ -30,6 +30,22 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  let { username, password } = req.body;
+
+  try {
+    const user = await users.findBy({ username }).first();
+
+    if (user && bcryptjs.compareSync(password, user.password)) {
+      const token = generateToken({ username, password });
+      res.status(200).json({ message: "Welcome", token: token });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 const generateToken = (user) => {
   const payload = {
     subject: user.id,
